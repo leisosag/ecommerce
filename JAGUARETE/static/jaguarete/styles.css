@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+:root {
+    --primary: #dc3545;
+    --background: #fafafa;
+}
+body {
+    background-color: var(--background);
+    font-family: 'Quicksand', sans-serif;
+}
+.logo {
+    width: 30px;
+}
+.footer p {
+    font-size: 12px;
+}
+.logo-footer img {
+    width: 8vh;
+}
+.logo-footer p {
+    font-weight: 700;
+    font-size: 18px;
+}
+.footer {
+    height: 10vh;
+}

@@ -1,6 +1,25 @@
 {% extends 'jaguarete/layout.html' %}
 {% block body %}
 <div class="container">
-    <h1>home</h1>
+    <div class="row pt-5 justify-content-center">
+        <h1>Productos</h1>
+    </div>
+    <div class="row justify-content-center py-5">
+        {% for product in latest_products %}
+        <div class="col-md-4 d-flex flex-column align-items-center justify-content-center p-2 mb-5">
+            {% load static %} <img src="{% static 'jaguarete/images/producto3.png' %}" alt="" class=" img-responsive">
+            <p class="py-2">{{product.id}} - {{product.title}}</p>
+            <a href="{% url 'JAGUARETE:product' product.id %}" class="btn btn-danger btn-block">Ver más</a>
+        </div>
+        {% endfor %}
+
+        {% for product in products %}
+            <div class="col-12 border d-flex pb-2">
+                <a href="{% url 'JAGUARETE:product' product.id %}" class="">
+                    <p>{{product.id}} - {{product.title}}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

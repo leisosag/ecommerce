@@ -20,6 +20,6 @@ body {
     font-weight: 700;
     font-size: 18px;
 }
-.footer {
-    height: 10vh;
+#new-product {
+    height: 100vh;
 }

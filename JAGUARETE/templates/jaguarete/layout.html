@@ -27,9 +27,9 @@
                 <li class="nav-item dropdown mr-2">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Categoria 1</a>
-                    <a class="dropdown-item" href="#">Categoria 2</a>
-                    <a class="dropdown-item" href="#">Categoria 3</a>
+                    {% for category in categories %}
+                    <a class="dropdown-item" href="#">{{category.description}}</a>
+                    {% endfor %}
                 </div>
                 </li>
                 <li class="nav-item mr-2">
@@ -42,8 +42,9 @@
                     <a class="nav-link" href="{% url 'JAGUARETE:product_add'%}">Nuevo producto</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 mr-4 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 mr-4 my-lg-0" method="POST" action="{% url 'JAGUARETE:search_results' %}">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar un producto" aria-label="Search" name="search_term">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search pr-2"></i>Buscar</button>
             </form>
             <ul class="navbar-nav ">

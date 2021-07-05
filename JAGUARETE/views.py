@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.views.generic import ListView, CreateView
 from .forms import ProductForm
-from .models import Product, Cart
-
-# products = ['producto 1', 'producto 2', 'producto 3', 'producto 4', 'producto 5']
+from .models import Product, Cart, Categories
 
 # Create your views here.
 def index(request):
@@ -14,7 +11,6 @@ def index(request):
     latest_products = products[:3]
     all_latest_products = products[3:-1]
     return render(request, "JAGUARETE/index.html", {
-        # "products": request.session["products"]
         'products': all_latest_products,
         'latest_products': latest_products
     })
@@ -42,18 +38,35 @@ def product_add(request):
     })
 
 def product_edit(request, product_id):
-    submitted = False
     product = Product.objects.get(id=product_id)
     form = ProductForm(request.POST or None, instance=product)
     if form.is_valid():
-            form.save()
-            return render(request, "JAGUARETE/index.html", {
-                'products': Product.objects.all()
-            })
+        form.save()
+        return render(request, "JAGUARETE/index.html", {
+            'products': Product.objects.all()
+        })
     return render(request, "JAGUARETE/product_edit.html", {
         'product': product,
         'form': form
     })
+
+def product_delete(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.delete()
+    return render(request, "JAGUARETE/index.html", {
+        'products': Product.objects.all()
+    })
+
+def search_results(request):
+    if request.method == 'POST':
+        search_term = request.POST['search_term']
+        products = Product.objects.filter(title__contains=search_term)
+        return render(request, "JAGUARETE/search_results.html", {
+            'search_term': search_term,
+            'products': products,
+        })
+    else:
+        return render(request, "JAGUARETE/search_results.html")
 
 def about(request):
     return render(request, "JAGUARETE/about.html")

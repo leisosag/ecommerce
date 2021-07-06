@@ -85,8 +85,3 @@ def about(request):
 def contact(request):
     return render(request, "JAGUARETE/contact.html")
 
-def login(request):
-    return render(request, "JAGUARETE/login.html")
-
-def register(request):
-    return render(request, "JAGUARETE/register.html")

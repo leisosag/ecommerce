@@ -26,6 +26,12 @@ def product(request, product_id):
         'product': product
     })
 
+def cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, "JAGUARETE/cart.html", {
+        'product': product
+    })
+
 def product_add(request):
     submitted = False
     if request.method == 'POST':
@@ -75,9 +81,6 @@ def search_results(request):
 
 def search_category(request):
     return render(request, "JAGUARETE/search_category.html")
-
-def cart(request):
-    return render(request, "JAGUARETE/cart.html")
 
 def about(request):
     return render(request, "JAGUARETE/about.html")

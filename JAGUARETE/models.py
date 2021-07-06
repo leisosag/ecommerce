@@ -18,7 +18,7 @@ class Product(models.Model):
         return f"{self.title}: {self.description} - ${self.price} - {self.category}"
 
 class Cart(models.Model):
-    products = models.ManyToManyField(Product, blank=True, related_name="productos_carrito")
+    products = models.ManyToManyField(Product, blank=True)
     total = models.IntegerField()
 
     def __str__(self):

@@ -1,0 +1,24 @@
+{% extends 'jaguarete/layout.html' %}
+{% block body %}
+<div class="container py-5">
+    <div class="row pb-5 justify-content-center">
+        <h1>Añadir un producto</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if submitted %}
+            <div class="alert alert-success" role="alert">
+                <p class="text-center font-weight-bold pt-2 pb-3">Se agregó el producto correctamente</p>
+                <a href="{% url 'JAGUARETE:product_add' %}" class="btn btn-danger btn-block">Cargar otro producto</a>
+            </div>
+            {% else %}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Guardar" class="btn btn-danger btn-block">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

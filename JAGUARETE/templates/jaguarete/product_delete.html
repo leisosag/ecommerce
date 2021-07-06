@@ -1,0 +1,21 @@
+<!--{% extends 'jaguarete/layout.html' %}
+{% block body %}
+<div class="container py-5">
+    <div class="row pb-5 justify-content-center">
+        <h1>Eliminar un producto</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if submitted %}
+            <p class="text-center pb-5">Se guardó el producto correctamente</p>
+            {% else %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Guardar cambios" class="btn btn-danger btn-block">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}-->

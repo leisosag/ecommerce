@@ -12,6 +12,7 @@ class Product(models.Model):
     description = models.CharField(max_length=300)
     price = models.IntegerField()
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="categoria")
+    product_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return f"{self.title}: {self.description} - ${self.price} - {self.category}"

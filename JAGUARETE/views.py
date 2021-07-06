@@ -15,6 +15,11 @@ def index(request):
         'latest_products': latest_products
     })
 
+def categories(request):
+    return render(request, "JAGUARETE/categories.html", {
+        'categories': Categories.objects.all()
+    })
+
 def product(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, "JAGUARETE/product.html", {
@@ -24,7 +29,7 @@ def product(request, product_id):
 def product_add(request):
     submitted = False
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/product_add?submitted=True')
@@ -67,6 +72,12 @@ def search_results(request):
         })
     else:
         return render(request, "JAGUARETE/search_results.html")
+
+def search_category(request):
+    return render(request, "JAGUARETE/search_category.html")
+
+def cart(request):
+    return render(request, "JAGUARETE/cart.html")
 
 def about(request):
     return render(request, "JAGUARETE/about.html")

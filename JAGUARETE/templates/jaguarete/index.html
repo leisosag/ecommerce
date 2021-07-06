@@ -7,19 +7,33 @@
     <div class="row justify-content-center py-5">
         {% for product in latest_products %}
         <div class="col-md-4 d-flex flex-column align-items-center justify-content-center p-2 mb-5">
-            {% load static %} <img src="{% static 'jaguarete/images/producto3.png' %}" alt="" class=" img-responsive">
-            <p class="py-2">{{product.id}} - {{product.title}}</p>
-            <a href="{% url 'JAGUARETE:product' product.id %}" class="btn btn-danger btn-block">Ver más</a>
+            <div class="card">
+                <img src="{{ product.product_image.url }}" alt="product" class=" img-responsive">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{product.title}}</h5>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'JAGUARETE:product_edit' product.id %}" class="btn btn-danger btn-block">Editar producto</a>
+                    {% else %}
+                        <a href="{% url 'JAGUARETE:product' product.id %}" class="btn btn-danger btn-block">Ver más</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         {% endfor %}
-
-        {% for product in products %}
-            <div class="col-12 border d-flex pb-2">
+        <div class="col-12">
+            {% for product in products %}
+            <div class="col-12 d-flex pb-2 align-items-center product-link">
+                <i class="fas fa-arrow-alt-circle-right mr-2"></i>
+                {% if user.is_superuser %}
+                <a href="{% url 'JAGUARETE:product_edit' product.id %}" class="">{{product.title}}</a>
+                {% else %}
                 <a href="{% url 'JAGUARETE:product' product.id %}" class="">
-                    <p>{{product.id}} - {{product.title}}</p>
+                    {{product.title}}
                 </a>
+                {% endif %}
             </div>
         {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

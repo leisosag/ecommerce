@@ -1,0 +1,31 @@
+{% extends 'jaguarete/layout.html' %}
+{% block body %}
+{% if not user.is_superuser %}
+<div class="container py-5">
+    <div class="row pb-5 justify-content-center">
+        <h1>{{product.title}}</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <img src="{{ product.product_image.url }}" alt="product" class=" img-responsive">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-between">
+            <p class="text-uppercase pb-2">Categoría: {{product.category}}</p>
+            <p>{{product.description}}</p>
+            <div class="d-flex row justify-content-between align-items-center">
+                <div class="col-6 pt-3">
+                    <p class="font-weight-bold">$ {{product.price}}</p>
+                </div>
+                <div class="col-6">
+                    {% if user.is_authenticated %}
+                    <button class="btn btn-danger btn-block">Agregar al carrito</button>
+                    {% else %}
+                    <a class="btn btn-danger btn-block" href="{% url 'login' %}">Agregar al carrito</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

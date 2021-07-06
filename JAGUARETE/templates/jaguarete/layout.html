@@ -14,49 +14,49 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger px-3">
         <a class="navbar-brand" href="{% url 'JAGUARETE:index'%}">
-            <img src="{% static 'jaguarete/images/logo4.png' %}" alt="logo" class="logo mr-2">
+            Jaguarete
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-2 active">
-                    <a class="nav-link" href="{% url 'JAGUARETE:index'%}">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'JAGUARETE:categories'%}">Categorías</a>
                 </li>
-                <li class="nav-item dropdown mr-2">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for category in categories %}
-                    <a class="dropdown-item" href="#">{{category.description}}</a>
-                    {% endfor %}
-                </div>
-                </li>
-                <li class="nav-item mr-2">
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'JAGUARETE:about'%}">Acerca de</a>
                 </li>
-                <li class="nav-item mr-2">
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'JAGUARETE:contact'%}">Contacto</a>
                 </li>
-                <li class="nav-item mr-2">
+                {% if user.is_superuser %}
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'JAGUARETE:product_add'%}">Nuevo producto</a>
                 </li>
+                {% endif %}
             </ul>
-            <form class="form-inline my-2 mr-4 my-lg-0" method="POST" action="{% url 'JAGUARETE:search_results' %}">
+            <form class="form-inline my-2 mr-2 my-lg-0" method="POST" action="{% url 'JAGUARETE:search_results' %}">
                 {% csrf_token %}
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar un producto" aria-label="Search" name="search_term">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search pr-2"></i>Buscar</button>
+                <button class="btn btn-light my-2 my-sm-0" type="submit"><i class="fas fa-search pr-2"></i>Buscar</button>
             </form>
             <ul class="navbar-nav ">
+                {% if user.is_authenticated %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'JAGUARETE:login'%}">Login</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'JAGUARETE:register'%}">Registro</a>
-            </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><span><i class="fas fa-shopping-cart pr-2"></i></span></a>
+                    <a class="nav-link" href="{% url 'JAGUARETE:cart'%}"><span><i class="fas fa-shopping-cart pr-2"></i></span></a>
                 </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'USUARIOS:register' %}">Registro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -65,11 +65,10 @@
     <footer class="bg-danger px-3">
         <div class="row footer align-items-center justify-content-center">
             <div class="col-12 d-flex logo-footer justify-content-center align-items-center">
-                <img src="{% static 'jaguarete/images/logo4.png' %}" alt="logo" class="pr-3">
-                <p class="text-white mt-3">Jaguarete</p>
+                <p class="logo pt-3">Jaguarete</p>
             </div>
         </div>
-        <div class="row flex-column align-items-center justify-content-center pt-3">
+        <div class="row flex-column align-items-center justify-content-center">
                 <p class="text-white">Copyright © 2021 Jaguarete Kaa S.A.</p>
                 <p class="text-white">Leila Sosa González</p>
         </div>

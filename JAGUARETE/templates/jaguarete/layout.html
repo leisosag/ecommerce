@@ -46,9 +46,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
+                {% if not user.is_superuser %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'JAGUARETE:cart'%}"><span><i class="fas fa-shopping-cart pr-2"></i></span></a>
                 </li>
+                {% endif %}
                 {% else %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'USUARIOS:register' %}">Registro</a>

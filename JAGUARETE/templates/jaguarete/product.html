@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-6">
                     {% if user.is_authenticated %}
-                    <button class="btn btn-danger btn-block">Agregar al carrito</button>
+                    <a class="btn btn-danger btn-block" href="{% url 'JAGUARETE:cart_add' product.id %}">Agregar al carrito</a>
                     {% else %}
                     <a class="btn btn-danger btn-block" href="{% url 'login' %}">Agregar al carrito</a>
                     {% endif %}
@@ -29,3 +29,4 @@
 </div>
 {% endif %}
 {% endblock %}
+

@@ -19,7 +19,3 @@ class Product(models.Model):
 
 class Cart(models.Model):
     products = models.ManyToManyField(Product, blank=True)
-    total = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.products} - total: ${self.total}"

@@ -26,11 +26,14 @@ def product(request, product_id):
         'product': product
     })
 
-def cart(request, product_id):
+def cart_add(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, "JAGUARETE/cart.html", {
         'product': product
     })
+
+def cart(request):
+    return render(request, "JAGUARETE/cart.html")
 
 def product_add(request):
     submitted = False
@@ -78,6 +81,12 @@ def search_results(request):
         })
     else:
         return render(request, "JAGUARETE/search_results.html")
+
+# def search_category(request, category_id):
+    # category = Categories.objects.get(id=category_id)
+    # return render(request, "JAGUARETE/search_category.html", {
+        # 'category': category
+    # })
 
 def search_category(request):
     return render(request, "JAGUARETE/search_category.html")
